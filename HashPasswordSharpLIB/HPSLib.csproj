@@ -40,6 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\HashPasswordHost.cs" />
+    <Compile Include="Config\HashPasswordConfiguration.cs" />
+    <Compile Include="Config\HashPasswordLogin.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="HashUtil.cs">
       <SubType>Code</SubType>
     </Compile>
