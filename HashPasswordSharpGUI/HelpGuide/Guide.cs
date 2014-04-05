@@ -47,6 +47,11 @@ namespace de.janbusch.HashPasswordSharp.HelpGuide
         {
             comboBoxTopic.Items.Clear();
 
+            if (Topics.Count == 0)
+            {
+                Topics.AddLast(new FirstStartupGP());
+            }
+
             foreach (var topic in Topics)
             {
                 comboBoxTopic.Items.Add(topic);

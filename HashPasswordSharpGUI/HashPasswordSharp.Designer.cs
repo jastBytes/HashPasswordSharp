@@ -55,8 +55,11 @@
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblConfigPath = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabPageHome.SuspendLayout();
+            this.tabPageSettings.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,6 +77,7 @@
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(414, 191);
             this.tabControl.TabIndex = 0;
+            this.tabControl.TabStop = false;
             // 
             // tabPageHome
             // 
@@ -106,7 +110,7 @@
             this.btnGeneratePassword.Location = new System.Drawing.Point(11, 132);
             this.btnGeneratePassword.Name = "btnGeneratePassword";
             this.btnGeneratePassword.Size = new System.Drawing.Size(387, 23);
-            this.btnGeneratePassword.TabIndex = 4;
+            this.btnGeneratePassword.TabIndex = 2;
             this.btnGeneratePassword.Text = "Generate password";
             this.btnGeneratePassword.UseVisualStyleBackColor = true;
             // 
@@ -117,7 +121,7 @@
             this.txtPassphraseReenter.Location = new System.Drawing.Point(119, 97);
             this.txtPassphraseReenter.Name = "txtPassphraseReenter";
             this.txtPassphraseReenter.Size = new System.Drawing.Size(279, 20);
-            this.txtPassphraseReenter.TabIndex = 3;
+            this.txtPassphraseReenter.TabIndex = 1;
             this.txtPassphraseReenter.UseSystemPasswordChar = true;
             // 
             // txtPassphrase
@@ -127,7 +131,7 @@
             this.txtPassphrase.Location = new System.Drawing.Point(119, 71);
             this.txtPassphrase.Name = "txtPassphrase";
             this.txtPassphrase.Size = new System.Drawing.Size(279, 20);
-            this.txtPassphrase.TabIndex = 3;
+            this.txtPassphrase.TabIndex = 0;
             this.txtPassphrase.UseSystemPasswordChar = true;
             // 
             // btnDeleteLogin
@@ -136,7 +140,7 @@
             this.btnDeleteLogin.Location = new System.Drawing.Point(352, 36);
             this.btnDeleteLogin.Name = "btnDeleteLogin";
             this.btnDeleteLogin.Size = new System.Drawing.Size(46, 23);
-            this.btnDeleteLogin.TabIndex = 2;
+            this.btnDeleteLogin.TabIndex = 8;
             this.btnDeleteLogin.Text = "Delete";
             this.btnDeleteLogin.UseVisualStyleBackColor = true;
             // 
@@ -146,7 +150,7 @@
             this.btnDeleteHost.Location = new System.Drawing.Point(352, 7);
             this.btnDeleteHost.Name = "btnDeleteHost";
             this.btnDeleteHost.Size = new System.Drawing.Size(46, 23);
-            this.btnDeleteHost.TabIndex = 2;
+            this.btnDeleteHost.TabIndex = 6;
             this.btnDeleteHost.Text = "Delete";
             this.btnDeleteHost.UseVisualStyleBackColor = true;
             // 
@@ -156,7 +160,7 @@
             this.button3.Location = new System.Drawing.Point(307, 36);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(39, 23);
-            this.button3.TabIndex = 2;
+            this.button3.TabIndex = 7;
             this.button3.Text = "Add";
             this.button3.UseVisualStyleBackColor = true;
             // 
@@ -170,7 +174,7 @@
             this.comboBoxLogin.Location = new System.Drawing.Point(85, 38);
             this.comboBoxLogin.Name = "comboBoxLogin";
             this.comboBoxLogin.Size = new System.Drawing.Size(216, 21);
-            this.comboBoxLogin.TabIndex = 1;
+            this.comboBoxLogin.TabIndex = 4;
             this.comboBoxLogin.ValueMember = "Name";
             // 
             // btnAddHost
@@ -179,7 +183,7 @@
             this.btnAddHost.Location = new System.Drawing.Point(307, 7);
             this.btnAddHost.Name = "btnAddHost";
             this.btnAddHost.Size = new System.Drawing.Size(39, 23);
-            this.btnAddHost.TabIndex = 2;
+            this.btnAddHost.TabIndex = 5;
             this.btnAddHost.Text = "Add";
             this.btnAddHost.UseVisualStyleBackColor = true;
             // 
@@ -211,8 +215,9 @@
             this.comboBoxHost.Location = new System.Drawing.Point(85, 9);
             this.comboBoxHost.Name = "comboBoxHost";
             this.comboBoxHost.Size = new System.Drawing.Size(216, 21);
-            this.comboBoxHost.TabIndex = 1;
+            this.comboBoxHost.TabIndex = 3;
             this.comboBoxHost.ValueMember = "Name";
+            this.comboBoxHost.SelectedIndexChanged += new System.EventHandler(this.comboBoxHost_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -234,6 +239,8 @@
             // 
             // tabPageSettings
             // 
+            this.tabPageSettings.Controls.Add(this.lblConfigPath);
+            this.tabPageSettings.Controls.Add(this.label5);
             this.tabPageSettings.Location = new System.Drawing.Point(4, 22);
             this.tabPageSettings.Name = "tabPageSettings";
             this.tabPageSettings.Padding = new System.Windows.Forms.Padding(3);
@@ -258,7 +265,8 @@
             this.btnHelp.Location = new System.Drawing.Point(187, 226);
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.Size = new System.Drawing.Size(75, 23);
-            this.btnHelp.TabIndex = 1;
+            this.btnHelp.TabIndex = 9;
+            this.btnHelp.TabStop = false;
             this.btnHelp.Text = "Help";
             this.btnHelp.UseVisualStyleBackColor = true;
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
@@ -269,7 +277,8 @@
             this.btnAbout.Location = new System.Drawing.Point(268, 225);
             this.btnAbout.Name = "btnAbout";
             this.btnAbout.Size = new System.Drawing.Size(75, 23);
-            this.btnAbout.TabIndex = 1;
+            this.btnAbout.TabIndex = 10;
+            this.btnAbout.TabStop = false;
             this.btnAbout.Text = "About";
             this.btnAbout.UseVisualStyleBackColor = true;
             // 
@@ -279,7 +288,8 @@
             this.btnExit.Location = new System.Drawing.Point(349, 226);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
-            this.btnExit.TabIndex = 1;
+            this.btnExit.TabIndex = 11;
+            this.btnExit.TabStop = false;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
@@ -342,6 +352,23 @@
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(7, 7);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(108, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Current configuration:";
+            // 
+            // lblConfigPath
+            // 
+            this.lblConfigPath.AutoSize = true;
+            this.lblConfigPath.Location = new System.Drawing.Point(122, 7);
+            this.lblConfigPath.Name = "lblConfigPath";
+            this.lblConfigPath.Size = new System.Drawing.Size(0, 13);
+            this.lblConfigPath.TabIndex = 1;
+            // 
             // HashPasswordSharp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -359,6 +386,8 @@
             this.tabControl.ResumeLayout(false);
             this.tabPageHome.ResumeLayout(false);
             this.tabPageHome.PerformLayout();
+            this.tabPageSettings.ResumeLayout(false);
+            this.tabPageSettings.PerformLayout();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -395,6 +424,8 @@
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.Label lblConfigPath;
+        private System.Windows.Forms.Label label5;
     }
 }
 

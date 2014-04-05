@@ -82,6 +82,28 @@ namespace de.janbusch.HashPasswordSharp
             Settings.Default.LastConfigFilepath = CurrentConfiguration.Filepath;
             Settings.Default.Save();
             tabControl.Enabled = true;
+            lblConfigPath.Text = CurrentConfiguration.Filepath;
+        }
+
+        private void LoadLogins()
+        {
+            if (comboBoxHost.SelectedItem == null) return;
+
+            var host = comboBoxHost.SelectedItem as HashPasswordHost;
+            comboBoxLogin.Items.Clear();
+            if (host == null) return;
+
+            comboBoxLogin.Items.AddRange(host.LoginNames.LoginName.ToArray());
+
+            if (!string.IsNullOrEmpty(host.LastLogin))
+            {
+                comboBoxLogin.SelectedItem =
+                    host.LoginNames.LoginName.FirstOrDefault(l => l.Name.Equals(host.LastLogin));
+            }
+            else
+            {
+                comboBoxLogin.SelectedItem = CurrentConfiguration.Hosts.Host.FirstOrDefault();
+            }
         }
         #endregion
 
@@ -118,6 +140,13 @@ namespace de.janbusch.HashPasswordSharp
                     OpenConfiguration(Settings.Default.LastConfigFilepath);
                 }
             }
+
+            txtPassphrase.Focus();
+        }
+
+        private void comboBoxHost_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadLogins();
         }
         #endregion
 
