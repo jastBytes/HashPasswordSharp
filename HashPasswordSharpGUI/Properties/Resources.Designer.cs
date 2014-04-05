@@ -59,5 +59,41 @@ namespace de.janbusch.HashPasswordSharp.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide &amp;password.
+        /// </summary>
+        internal static string ChooseActionDialog_btnHidePassword {
+            get {
+                return ResourceManager.GetString("ChooseActionDialog_btnHidePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show &amp;password.
+        /// </summary>
+        internal static string ChooseActionDialog_btnShowPassword {
+            get {
+                return ResourceManager.GetString("ChooseActionDialog_btnShowPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have changes within your configuration. Do you want to save them?.
+        /// </summary>
+        internal static string HashPasswordSharp_Question_SaveChanges {
+            get {
+                return ResourceManager.GetString("HashPasswordSharp_Question_SaveChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save changes.
+        /// </summary>
+        internal static string HashPasswordSharp_QuestionTitle_SaveChanges {
+            get {
+                return ResourceManager.GetString("HashPasswordSharp_QuestionTitle_SaveChanges", resourceCulture);
+            }
+        }
     }
 }

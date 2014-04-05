@@ -34,5 +34,42 @@ namespace de.janbusch.HashPasswordSharp.Properties {
                 this["LastConfigFilepath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("SHA512")]
+        public string HashType {
+            get {
+                return ((string)(this["HashType"]));
+            }
+            set {
+                this["HashType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("32")]
+        public string PasswordLength {
+            get {
+                return ((string)(this["PasswordLength"]));
+            }
+            set {
+                this["PasswordLength"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_0123456789!\"§$%&/()=?*\'+#.;" +
+            ":")]
+        public string Charset {
+            get {
+                return ((string)(this["Charset"]));
+            }
+            set {
+                this["Charset"] = value;
+            }
+        }
     }
 }

@@ -5,5 +5,14 @@
     <Setting Name="LastConfigFilepath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="HashType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">SHA512</Value>
+    </Setting>
+    <Setting Name="PasswordLength" Type="System.String" Scope="User">
+      <Value Profile="(Default)">32</Value>
+    </Setting>
+    <Setting Name="Charset" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_0123456789!"§$%&amp;/()=?*'+#.;:</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

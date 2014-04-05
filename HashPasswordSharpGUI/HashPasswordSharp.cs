@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Security.Permissions;
 using System.Windows.Forms;
 using de.janbusch.HashPasswordSharp.HelpGuide;
+using de.janbusch.HashPasswordSharp.lib;
 using de.janbusch.HashPasswordSharp.lib.Config;
 using de.janbusch.HashPasswordSharp.Properties;
 
@@ -40,22 +42,62 @@ namespace de.janbusch.HashPasswordSharp
         #endregion
 
         #region Control methods
+        private void GeneratePassword()
+        {
+            HashUtil.SupportedHashAlgorithm algorithm;
+            var host = comboBoxHost.SelectedItem as HashPasswordHost;
+            var loginName = comboBoxLogin.SelectedItem as HashPasswordLogin;
+
+            if (host == null || loginName == null) return;
+
+            var hashAlgorithm = string.IsNullOrEmpty(loginName.HashType)
+                ? (string.IsNullOrEmpty(host.HashType) ? Settings.Default.HashType : host.HashType)
+                : loginName.HashType;
+            var characterSet = string.IsNullOrEmpty(loginName.Charset)
+                ? (string.IsNullOrEmpty(host.Charset) ? Settings.Default.Charset : host.Charset)
+                : loginName.Charset;
+            var maxPwLength = string.IsNullOrEmpty(loginName.PasswordLength)
+                ? (string.IsNullOrEmpty(host.PasswordLength) ? Settings.Default.PasswordLength : host.PasswordLength)
+                : loginName.PasswordLength;
+
+            if (!Enum.TryParse(hashAlgorithm, out algorithm)) return;
+
+            var password = HashUtil.GeneratePassword(host.Name, loginName.Name,
+                txtPassphrase.Text, algorithm, characterSet, Convert.ToInt32(maxPwLength));
+            new ChooseActionDialog(password).ShowDialog();
+        }
+
+        private void EnableSaveChanges()
+        {
+            saveToolStripMenuItem.Enabled = true;
+            saveAsToolStripMenuItem.Enabled = true;
+        }
+
+        private void DisableSaveChanges()
+        {
+            saveToolStripMenuItem.Enabled = false;
+            saveAsToolStripMenuItem.Enabled = false;
+        }
+
         private void CreateNewConfiguration()
         {
             var conf = new HashPasswordConfiguration();
             SaveConfig();
         }
 
-        private void SaveConfig()
+        private void SaveConfig(string path = null)
         {
-            throw new NotImplementedException();
+            CurrentConfiguration.SaveToXml(path);
+            lblConfigPath.Text = CurrentConfiguration.Filepath;
+            Settings.Default.LastConfigFilepath = CurrentConfiguration.Filepath;
+            Settings.Default.Save();
         }
 
         private void OpenConfiguration(string filePath = null)
         {
             if (string.IsNullOrEmpty(filePath))
             {
-                openFileDialog.ShowDialog();
+                if (openFileDialog.ShowDialog() == DialogResult.Cancel) return;
                 filePath = openFileDialog.FileName;
             }
 
@@ -79,6 +121,10 @@ namespace de.janbusch.HashPasswordSharp
                 comboBoxHost.SelectedItem = CurrentConfiguration.Hosts.Host.FirstOrDefault();
             }
 
+            DisableSaveChanges();
+            CurrentConfiguration.HasChanged = false;
+            saveAsToolStripMenuItem.Enabled = true;
+            CurrentConfiguration.ConfigChanged += CurrentConfiguration_ConfigChanged;
             Settings.Default.LastConfigFilepath = CurrentConfiguration.Filepath;
             Settings.Default.Save();
             tabControl.Enabled = true;
@@ -108,6 +154,17 @@ namespace de.janbusch.HashPasswordSharp
         #endregion
 
         #region Events
+        private void btnGeneratePassword_Click(object sender, EventArgs e)
+        {
+            GeneratePassword();
+        }
+
+
+        void CurrentConfiguration_ConfigChanged(object sender, EventArgs e)
+        {
+            EnableSaveChanges();
+        }
+
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenConfiguration();
@@ -115,6 +172,21 @@ namespace de.janbusch.HashPasswordSharp
 
         private void btnExit_Click(object sender, System.EventArgs e)
         {
+            if (CurrentConfiguration != null && CurrentConfiguration.HasChanged)
+            {
+                var res = MessageBox.Show(Resources.HashPasswordSharp_Question_SaveChanges, Resources.HashPasswordSharp_QuestionTitle_SaveChanges,
+                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+                switch (res)
+                {
+                    case DialogResult.Yes:
+                        SaveConfig();
+                        break;
+                    case DialogResult.No:
+                        break;
+                    case DialogResult.Cancel:
+                        return;
+                }
+            }
             this.Close();
         }
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -147,6 +219,64 @@ namespace de.janbusch.HashPasswordSharp
         private void comboBoxHost_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadLogins();
+            var hashPasswordHost = comboBoxHost.SelectedItem as HashPasswordHost;
+            if (hashPasswordHost == null) return;
+            CurrentConfiguration.LastHost = hashPasswordHost.Name;
+            CurrentConfiguration.HasChanged = true;
+        }
+
+        private void comboBoxLogin_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var hashPasswordHost = comboBoxHost.SelectedItem as HashPasswordHost;
+            if (hashPasswordHost == null) return;
+            CurrentConfiguration.LastHost = hashPasswordHost.Name;
+            CurrentConfiguration.HasChanged = true;
+            var hashPasswordLogin = comboBoxLogin.SelectedItem as HashPasswordLogin;
+            if (hashPasswordLogin != null) hashPasswordHost.LastLogin = hashPasswordLogin.Name;
+        }
+
+        private void txtPassphrase_TextChanged(object sender, EventArgs e)
+        {
+            btnGeneratePassword.Enabled = !string.IsNullOrEmpty(txtPassphrase.Text);
+            if (!string.IsNullOrEmpty(txtPassphrase.Text) && !string.IsNullOrEmpty(txtPassphraseReenter.Text) &&
+                txtPassphrase.Text == txtPassphraseReenter.Text)
+            {
+                btnGeneratePassword.ForeColor = Color.DarkGreen;
+            }
+            else
+            {
+                btnGeneratePassword.ForeColor = Color.DarkRed;
+            }
+        }
+
+        private void txtPassphraseReenter_TextChanged(object sender, EventArgs e)
+        {
+            btnGeneratePassword.Enabled = !string.IsNullOrEmpty(txtPassphrase.Text) && ((!string.IsNullOrEmpty(txtPassphraseReenter.Text) && txtPassphrase.Text == txtPassphraseReenter.Text) || string.IsNullOrEmpty(txtPassphraseReenter.Text));
+            if (!string.IsNullOrEmpty(txtPassphrase.Text) && !string.IsNullOrEmpty(txtPassphraseReenter.Text) &&
+                txtPassphrase.Text == txtPassphraseReenter.Text)
+            {
+                btnGeneratePassword.ForeColor = Color.DarkGreen;
+            }
+            else
+            {
+                btnGeneratePassword.ForeColor = Color.DarkRed;
+            }
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog.ShowDialog() == DialogResult.Cancel) return;
+            var filename = saveFileDialog.FileName;
+            SaveConfig(filename);
+        }
+
+        private void HashPasswordSharp_HelpButtonClicked(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            ShowGuide();
+        }
+        private void HashPasswordSharp_HelpRequested(object sender, HelpEventArgs hlpevent)
+        {
+            ShowGuide();
         }
         #endregion
 

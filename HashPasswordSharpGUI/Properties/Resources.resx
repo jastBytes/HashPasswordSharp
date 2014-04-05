@@ -114,4 +114,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="HashPasswordSharp_Question_SaveChanges" xml:space="preserve">
+    <value>You have changes within your configuration. Do you want to save them?</value>
+  </data>
+  <data name="HashPasswordSharp_QuestionTitle_SaveChanges" xml:space="preserve">
+    <value>Save changes</value>
+  </data>
+  <data name="ChooseActionDialog_btnShowPassword" xml:space="preserve">
+    <value>Show &amp;password</value>
+  </data>
+  <data name="ChooseActionDialog_btnHidePassword" xml:space="preserve">
+    <value>Hide &amp;password</value>
+  </data>
 </root>

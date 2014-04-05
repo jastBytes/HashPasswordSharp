@@ -44,6 +44,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPageSettings = new System.Windows.Forms.TabPage();
+            this.lblConfigPath = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.tabPageSynchronization = new System.Windows.Forms.TabPage();
             this.btnHelp = new System.Windows.Forms.Button();
             this.btnAbout = new System.Windows.Forms.Button();
@@ -53,10 +55,9 @@
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lblConfigPath = new System.Windows.Forms.Label();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.tabControl.SuspendLayout();
             this.tabPageHome.SuspendLayout();
             this.tabPageSettings.SuspendLayout();
@@ -113,6 +114,7 @@
             this.btnGeneratePassword.TabIndex = 2;
             this.btnGeneratePassword.Text = "Generate password";
             this.btnGeneratePassword.UseVisualStyleBackColor = true;
+            this.btnGeneratePassword.Click += new System.EventHandler(this.btnGeneratePassword_Click);
             // 
             // txtPassphraseReenter
             // 
@@ -123,6 +125,7 @@
             this.txtPassphraseReenter.Size = new System.Drawing.Size(279, 20);
             this.txtPassphraseReenter.TabIndex = 1;
             this.txtPassphraseReenter.UseSystemPasswordChar = true;
+            this.txtPassphraseReenter.TextChanged += new System.EventHandler(this.txtPassphraseReenter_TextChanged);
             // 
             // txtPassphrase
             // 
@@ -133,6 +136,7 @@
             this.txtPassphrase.Size = new System.Drawing.Size(279, 20);
             this.txtPassphrase.TabIndex = 0;
             this.txtPassphrase.UseSystemPasswordChar = true;
+            this.txtPassphrase.TextChanged += new System.EventHandler(this.txtPassphrase_TextChanged);
             // 
             // btnDeleteLogin
             // 
@@ -176,6 +180,7 @@
             this.comboBoxLogin.Size = new System.Drawing.Size(216, 21);
             this.comboBoxLogin.TabIndex = 4;
             this.comboBoxLogin.ValueMember = "Name";
+            this.comboBoxLogin.SelectedIndexChanged += new System.EventHandler(this.comboBoxLogin_SelectedIndexChanged);
             // 
             // btnAddHost
             // 
@@ -249,6 +254,23 @@
             this.tabPageSettings.Text = "Settings";
             this.tabPageSettings.UseVisualStyleBackColor = true;
             // 
+            // lblConfigPath
+            // 
+            this.lblConfigPath.AutoSize = true;
+            this.lblConfigPath.Location = new System.Drawing.Point(122, 7);
+            this.lblConfigPath.Name = "lblConfigPath";
+            this.lblConfigPath.Size = new System.Drawing.Size(0, 13);
+            this.lblConfigPath.TabIndex = 1;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(7, 7);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(108, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Current configuration:";
+            // 
             // tabPageSynchronization
             // 
             this.tabPageSynchronization.Location = new System.Drawing.Point(4, 22);
@@ -319,7 +341,7 @@
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -328,15 +350,23 @@
             this.saveToolStripMenuItem.Enabled = false;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Enabled = false;
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.saveAsToolStripMenuItem.Text = "Save as...";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // openFileDialog
             // 
@@ -345,29 +375,12 @@
             this.openFileDialog.RestoreDirectory = true;
             this.openFileDialog.Title = "Choose configuration";
             // 
-            // exitToolStripMenuItem
+            // saveFileDialog
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 7);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(108, 13);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Current configuration:";
-            // 
-            // lblConfigPath
-            // 
-            this.lblConfigPath.AutoSize = true;
-            this.lblConfigPath.Location = new System.Drawing.Point(122, 7);
-            this.lblConfigPath.Name = "lblConfigPath";
-            this.lblConfigPath.Size = new System.Drawing.Size(0, 13);
-            this.lblConfigPath.TabIndex = 1;
+            this.saveFileDialog.FileName = "HashPassword.xml";
+            this.saveFileDialog.Filter = "XML|*.xml";
+            this.saveFileDialog.RestoreDirectory = true;
+            this.saveFileDialog.Title = "Save configuration";
             // 
             // HashPasswordSharp
             // 
@@ -379,10 +392,13 @@
             this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.menuStrip);
+            this.HelpButton = true;
             this.MainMenuStrip = this.menuStrip;
             this.Name = "HashPasswordSharp";
             this.Text = "HashPasswordSharp";
+            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.HashPasswordSharp_HelpButtonClicked);
             this.Shown += new System.EventHandler(this.HashPasswordSharp_Shown);
+            this.HelpRequested += new System.Windows.Forms.HelpEventHandler(this.HashPasswordSharp_HelpRequested);
             this.tabControl.ResumeLayout(false);
             this.tabPageHome.ResumeLayout(false);
             this.tabPageHome.PerformLayout();
@@ -426,6 +442,7 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Label lblConfigPath;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
 

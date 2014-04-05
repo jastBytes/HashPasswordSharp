@@ -51,7 +51,7 @@
             this.guidePanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.guidePanel.Location = new System.Drawing.Point(12, 36);
             this.guidePanel.Name = "guidePanel";
-            this.guidePanel.Size = new System.Drawing.Size(598, 315);
+            this.guidePanel.Size = new System.Drawing.Size(527, 312);
             this.guidePanel.TabIndex = 1;
             // 
             // comboBoxTopic
@@ -60,7 +60,7 @@
             this.comboBoxTopic.DisplayMember = "Title";
             this.comboBoxTopic.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxTopic.FormattingEnabled = true;
-            this.comboBoxTopic.Location = new System.Drawing.Point(445, 12);
+            this.comboBoxTopic.Location = new System.Drawing.Point(374, 12);
             this.comboBoxTopic.Name = "comboBoxTopic";
             this.comboBoxTopic.Size = new System.Drawing.Size(165, 21);
             this.comboBoxTopic.TabIndex = 2;
@@ -70,7 +70,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(622, 363);
+            this.ClientSize = new System.Drawing.Size(551, 360);
             this.Controls.Add(this.comboBoxTopic);
             this.Controls.Add(this.guidePanel);
             this.Controls.Add(this.label1);
