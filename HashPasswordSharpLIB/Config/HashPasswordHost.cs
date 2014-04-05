@@ -6,22 +6,29 @@ namespace de.janbusch.HashPasswordSharp.lib.Config
     [XmlRoot(ElementName = "Host")]
     public class HashPasswordHost
     {
-        [XmlElement(IsNullable = false)]
+        [XmlAttribute]
         public string HashType { get; set; }
 
-        [XmlElement(IsNullable = false)]
+        [XmlAttribute]
         public string Charset { get; set; }
 
-        [XmlElement(IsNullable = false)]
+        [XmlAttribute]
         public string PasswordLength { get; set; }
 
-        [XmlElement(IsNullable = false)]
+        [XmlAttribute]
         public string Name { get; set; }
 
-        [XmlElement(IsNullable = true)]
+        [XmlAttribute]
         public string LastLogin { get; set; }
 
         [XmlElement(IsNullable = true)]
-        public List<HashPasswordLogin> LoginNames { get; set; }
+        public HashPasswordLoginNames LoginNames { get; set; }
+    }
+
+    [XmlRoot(ElementName = "LoginNames")]
+    public class HashPasswordLoginNames
+    {
+        [XmlElement(IsNullable = true)]
+        public List<HashPasswordLogin> LoginName { get; set; }
     }
 }

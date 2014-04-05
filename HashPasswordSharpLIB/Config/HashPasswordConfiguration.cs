@@ -7,25 +7,25 @@ namespace de.janbusch.HashPasswordSharp.lib.Config
     public class HashPasswordConfiguration
     {
         [XmlElement(IsNullable = false)]
-        private List<HashPasswordHost> Hosts { get; set; }
+        public HashPasswordHosts Hosts { get; set; }
 
-        [XmlElement(IsNullable = true)]
-        private int Version { get; set; }
+        [XmlAttribute]
+        public string Version { get; set; }
 
-        [XmlElement(IsNullable = true)]
-        private string DefaultHashType { get; set; }
+        [XmlAttribute]
+        public string DefaultHashType { get; set; }
 
-        [XmlElement(IsNullable = true)]
-        private string DefaultCharset { get; set; }
+        [XmlAttribute]
+        public string DefaultCharset { get; set; }
 
-        [XmlElement(IsNullable = true)]
-        private string DefaultPasswordLength { get; set; }
+        [XmlAttribute]
+        public string DefaultPasswordLength { get; set; }
 
-        [XmlElement(IsNullable = true)]
-        private string LastHost { get; set; }
+        [XmlAttribute]
+        public string LastHost { get; set; }
 
-        [XmlElement(IsNullable = true)]
-        private int Timeout { get; set; }
+        [XmlAttribute]
+        public string Timeout { get; set; }
 
         public void SaveToXml(string path)
         {
@@ -44,6 +44,18 @@ namespace de.janbusch.HashPasswordSharp.lib.Config
                 var result = (HashPasswordConfiguration)reader.Deserialize(file);
                 return result;
             }
+        }
+    }
+
+    public class HashPasswordHosts
+    {
+        [XmlElement(ElementName = "Host", IsNullable = false)]
+        public List<HashPasswordHost> Host { get; set; }
+
+        [XmlAttribute]
+        public string Count
+        {
+            get { return Host.Count.ToString(); }
         }
     }
 }

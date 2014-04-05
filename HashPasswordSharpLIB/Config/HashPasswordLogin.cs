@@ -5,16 +5,16 @@ namespace de.janbusch.HashPasswordSharp.lib.Config
     [XmlRoot(ElementName = "LoginName")]
     public class HashPasswordLogin
     {
-        [XmlElement(IsNullable = false)]
+        [XmlAttribute]
         public string HashType { get; set; }
 
-        [XmlElement(IsNullable = false)]
+        [XmlAttribute]
         public string Charset { get; set; }
 
-        [XmlElement(IsNullable = false)]
+        [XmlAttribute]
         public string PasswordLength { get; set; }
 
-        [XmlElement(IsNullable = false)]
+        [XmlAttribute]
         public string Name { get; set; }
     }
 }
