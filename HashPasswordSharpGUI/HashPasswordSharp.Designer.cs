@@ -1,6 +1,6 @@
-﻿namespace HashPasswordSharp
+﻿namespace de.janbusch.HashPasswordSharp
 {
-    partial class Form1
+    partial class HashPasswordSharp
     {
         /// <summary>
         /// Required designer variable.
@@ -28,9 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // HashPasswordSharp
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(759, 412);
+            this.Name = "HashPasswordSharp";
+            this.Text = "HashPasswordSharp";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

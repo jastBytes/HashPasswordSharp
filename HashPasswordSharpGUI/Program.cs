@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace HashPasswordSharp
+namespace de.janbusch.HashPasswordSharp
 {
     static class Program
     {
@@ -16,7 +13,7 @@ namespace HashPasswordSharp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new de.janbusch.HashPasswordSharp.HashPasswordSharp());
         }
     }
 }
