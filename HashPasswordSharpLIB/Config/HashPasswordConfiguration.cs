@@ -6,6 +6,9 @@ namespace de.janbusch.HashPasswordSharp.lib.Config
     [XmlRoot(ElementName = "HashPassword")]
     public class HashPasswordConfiguration
     {
+        [XmlIgnore]
+        public string Filepath { get; set; }
+
         [XmlElement(IsNullable = false)]
         public HashPasswordHosts Hosts { get; set; }
 
@@ -42,6 +45,8 @@ namespace de.janbusch.HashPasswordSharp.lib.Config
             using (var file = new System.IO.StreamReader(path))
             {
                 var result = (HashPasswordConfiguration)reader.Deserialize(file);
+                result.Filepath = path;
+
                 return result;
             }
         }

@@ -22,5 +22,17 @@ namespace de.janbusch.HashPasswordSharp.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastConfigFilepath {
+            get {
+                return ((string)(this["LastConfigFilepath"]));
+            }
+            set {
+                this["LastConfigFilepath"] = value;
+            }
+        }
     }
 }
