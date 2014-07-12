@@ -51,18 +51,14 @@ namespace de.janbusch.HashPasswordSharp.lib
 
             int maxBitCnt = (int)Math.Ceiling(Math.Log(charSetLength) / Math.Log(2));
 
-            for (int i = 0; (i < maxPwLength)
-                    && ((pos * 8 + bitno) < (digestLength * 8)); ++i)
+            for (int i = 0; (i < maxPwLength) && ((pos * 8 + bitno) < (digestLength * 8)); ++i)
             {
                 int part = 0;
                 int bitCnt = maxBitCnt;
                 int actPos = pos;
                 int actBitno = bitno;
 
-                int j = 0;
-
-                for (; (j < bitCnt)
-                        && ((actPos * 8 + actBitno) < (digestLength * 8)); ++j)
+                for (int j = 0; (j < bitCnt) && ((actPos * 8 + actBitno) < (digestLength * 8)); ++j)
                 {
                     part <<= 1;
                     part |= ((digest[actPos] & (1 << actBitno)) != 0) ? 1 : 0;

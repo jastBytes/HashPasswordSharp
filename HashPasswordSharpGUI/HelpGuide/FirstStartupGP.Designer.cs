@@ -49,9 +49,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(8, 34);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(394, 13);
+            this.label2.Size = new System.Drawing.Size(160, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "You have no configuration loaded or created yet. You have two options from here:";
+            this.label2.Text = "You have two options from here:";
             // 
             // btnCreateConfig
             // 

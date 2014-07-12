@@ -22,7 +22,7 @@ namespace de.janbusch.HashPasswordSharp.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace de.janbusch.HashPasswordSharp.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("de.janbusch.HashPasswordSharp.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace de.janbusch.HashPasswordSharp.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace de.janbusch.HashPasswordSharp.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Hide &amp;password.
         /// </summary>
-        internal static string ChooseActionDialog_btnHidePassword {
+        public static string ChooseActionDialog_btnHidePassword {
             get {
                 return ResourceManager.GetString("ChooseActionDialog_btnHidePassword", resourceCulture);
             }
@@ -72,16 +72,26 @@ namespace de.janbusch.HashPasswordSharp.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Show &amp;password.
         /// </summary>
-        internal static string ChooseActionDialog_btnShowPassword {
+        public static string ChooseActionDialog_btnShowPassword {
             get {
                 return ResourceManager.GetString("ChooseActionDialog_btnShowPassword", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Crystal_Clear_action_lock_silver {
+            get {
+                object obj = ResourceManager.GetObject("Crystal_Clear_action_lock_silver", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have changes within your configuration. Do you want to save them?.
         /// </summary>
-        internal static string HashPasswordSharp_Question_SaveChanges {
+        public static string HashPasswordSharp_Question_SaveChanges {
             get {
                 return ResourceManager.GetString("HashPasswordSharp_Question_SaveChanges", resourceCulture);
             }
@@ -90,7 +100,7 @@ namespace de.janbusch.HashPasswordSharp.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Save changes.
         /// </summary>
-        internal static string HashPasswordSharp_QuestionTitle_SaveChanges {
+        public static string HashPasswordSharp_QuestionTitle_SaveChanges {
             get {
                 return ResourceManager.GetString("HashPasswordSharp_QuestionTitle_SaveChanges", resourceCulture);
             }

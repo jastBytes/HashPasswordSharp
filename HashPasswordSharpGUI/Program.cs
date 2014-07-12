@@ -13,7 +13,7 @@ namespace de.janbusch.HashPasswordSharp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new de.janbusch.HashPasswordSharp.HashPasswordSharp());
+            Application.Run(new HashPasswordSharp());
         }
     }
 }

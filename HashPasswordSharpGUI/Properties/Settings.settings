@@ -14,5 +14,14 @@
     <Setting Name="Charset" Type="System.String" Scope="User">
       <Value Profile="(Default)">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_0123456789!"§$%&amp;/()=?*'+#.;:</Value>
     </Setting>
+    <Setting Name="AppIcon" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Crystal_Clear_action_lock-silver.ico</Value>
+    </Setting>
+    <Setting Name="StartMinimized" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ClearOnExit" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

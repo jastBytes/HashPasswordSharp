@@ -71,5 +71,41 @@ namespace de.janbusch.HashPasswordSharp.Properties {
                 this["Charset"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Crystal_Clear_action_lock-silver.ico")]
+        public string AppIcon {
+            get {
+                return ((string)(this["AppIcon"]));
+            }
+            set {
+                this["AppIcon"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool StartMinimized {
+            get {
+                return ((bool)(this["StartMinimized"]));
+            }
+            set {
+                this["StartMinimized"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ClearOnExit {
+            get {
+                return ((bool)(this["ClearOnExit"]));
+            }
+            set {
+                this["ClearOnExit"] = value;
+            }
+        }
     }
 }

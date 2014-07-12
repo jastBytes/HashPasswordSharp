@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HashPasswordSharp));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageHome = new System.Windows.Forms.TabPage();
             this.btnGeneratePassword = new System.Windows.Forms.Button();
@@ -44,11 +46,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPageSettings = new System.Windows.Forms.TabPage();
+            this.checkBoxStartMinimized = new System.Windows.Forms.CheckBox();
+            this.checkBoxStartup = new System.Windows.Forms.CheckBox();
             this.lblConfigPath = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.tabPageSynchronization = new System.Windows.Forms.TabPage();
             this.btnHelp = new System.Windows.Forms.Button();
-            this.btnAbout = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,10 +61,16 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.notifyContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.restoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkBoxClearPwOnExit = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
             this.tabPageHome.SuspendLayout();
             this.tabPageSettings.SuspendLayout();
             this.menuStrip.SuspendLayout();
+            this.notifyContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -76,7 +85,7 @@
             this.tabControl.Location = new System.Drawing.Point(12, 28);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(414, 191);
+            this.tabControl.Size = new System.Drawing.Size(427, 190);
             this.tabControl.TabIndex = 0;
             this.tabControl.TabStop = false;
             // 
@@ -98,7 +107,7 @@
             this.tabPageHome.Location = new System.Drawing.Point(4, 22);
             this.tabPageHome.Name = "tabPageHome";
             this.tabPageHome.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageHome.Size = new System.Drawing.Size(406, 165);
+            this.tabPageHome.Size = new System.Drawing.Size(419, 164);
             this.tabPageHome.TabIndex = 0;
             this.tabPageHome.Text = "Home";
             this.tabPageHome.UseVisualStyleBackColor = true;
@@ -126,6 +135,7 @@
             this.txtPassphraseReenter.TabIndex = 1;
             this.txtPassphraseReenter.UseSystemPasswordChar = true;
             this.txtPassphraseReenter.TextChanged += new System.EventHandler(this.txtPassphraseReenter_TextChanged);
+            this.txtPassphraseReenter.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPassphraseReenter_KeyUp);
             // 
             // txtPassphrase
             // 
@@ -137,6 +147,7 @@
             this.txtPassphrase.TabIndex = 0;
             this.txtPassphrase.UseSystemPasswordChar = true;
             this.txtPassphrase.TextChanged += new System.EventHandler(this.txtPassphrase_TextChanged);
+            this.txtPassphrase.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPassphrase_KeyUp);
             // 
             // btnDeleteLogin
             // 
@@ -244,22 +255,50 @@
             // 
             // tabPageSettings
             // 
+            this.tabPageSettings.AutoScroll = true;
+            this.tabPageSettings.Controls.Add(this.checkBoxClearPwOnExit);
+            this.tabPageSettings.Controls.Add(this.checkBoxStartMinimized);
+            this.tabPageSettings.Controls.Add(this.checkBoxStartup);
             this.tabPageSettings.Controls.Add(this.lblConfigPath);
             this.tabPageSettings.Controls.Add(this.label5);
             this.tabPageSettings.Location = new System.Drawing.Point(4, 22);
             this.tabPageSettings.Name = "tabPageSettings";
             this.tabPageSettings.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSettings.Size = new System.Drawing.Size(406, 165);
+            this.tabPageSettings.Size = new System.Drawing.Size(419, 164);
             this.tabPageSettings.TabIndex = 1;
             this.tabPageSettings.Text = "Settings";
             this.tabPageSettings.UseVisualStyleBackColor = true;
             // 
+            // checkBoxStartMinimized
+            // 
+            this.checkBoxStartMinimized.AutoSize = true;
+            this.checkBoxStartMinimized.Location = new System.Drawing.Point(125, 33);
+            this.checkBoxStartMinimized.Name = "checkBoxStartMinimized";
+            this.checkBoxStartMinimized.Size = new System.Drawing.Size(96, 17);
+            this.checkBoxStartMinimized.TabIndex = 3;
+            this.checkBoxStartMinimized.Text = "Start minimized";
+            this.checkBoxStartMinimized.UseVisualStyleBackColor = true;
+            this.checkBoxStartMinimized.CheckedChanged += new System.EventHandler(this.checkBoxStartMinimized_CheckedChanged);
+            // 
+            // checkBoxStartup
+            // 
+            this.checkBoxStartup.AutoSize = true;
+            this.checkBoxStartup.Location = new System.Drawing.Point(10, 33);
+            this.checkBoxStartup.Name = "checkBoxStartup";
+            this.checkBoxStartup.Size = new System.Drawing.Size(87, 17);
+            this.checkBoxStartup.TabIndex = 2;
+            this.checkBoxStartup.Text = "Start on boot";
+            this.checkBoxStartup.UseVisualStyleBackColor = true;
+            this.checkBoxStartup.CheckedChanged += new System.EventHandler(this.checkBoxStartup_CheckedChanged);
+            // 
             // lblConfigPath
             // 
-            this.lblConfigPath.AutoSize = true;
-            this.lblConfigPath.Location = new System.Drawing.Point(122, 7);
+            this.lblConfigPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblConfigPath.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblConfigPath.Location = new System.Drawing.Point(122, 3);
             this.lblConfigPath.Name = "lblConfigPath";
-            this.lblConfigPath.Size = new System.Drawing.Size(0, 13);
+            this.lblConfigPath.Size = new System.Drawing.Size(291, 23);
             this.lblConfigPath.TabIndex = 1;
             // 
             // label5
@@ -276,7 +315,7 @@
             this.tabPageSynchronization.Location = new System.Drawing.Point(4, 22);
             this.tabPageSynchronization.Name = "tabPageSynchronization";
             this.tabPageSynchronization.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSynchronization.Size = new System.Drawing.Size(406, 165);
+            this.tabPageSynchronization.Size = new System.Drawing.Size(419, 164);
             this.tabPageSynchronization.TabIndex = 2;
             this.tabPageSynchronization.Text = "Sync";
             this.tabPageSynchronization.UseVisualStyleBackColor = true;
@@ -284,7 +323,7 @@
             // btnHelp
             // 
             this.btnHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnHelp.Location = new System.Drawing.Point(187, 226);
+            this.btnHelp.Location = new System.Drawing.Point(281, 225);
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.Size = new System.Drawing.Size(75, 23);
             this.btnHelp.TabIndex = 9;
@@ -293,21 +332,10 @@
             this.btnHelp.UseVisualStyleBackColor = true;
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
-            // btnAbout
-            // 
-            this.btnAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAbout.Location = new System.Drawing.Point(268, 225);
-            this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Size = new System.Drawing.Size(75, 23);
-            this.btnAbout.TabIndex = 10;
-            this.btnAbout.TabStop = false;
-            this.btnAbout.Text = "About";
-            this.btnAbout.UseVisualStyleBackColor = true;
-            // 
             // btnExit
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExit.Location = new System.Drawing.Point(349, 226);
+            this.btnExit.Location = new System.Drawing.Point(362, 225);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 11;
@@ -322,7 +350,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(438, 24);
+            this.menuStrip.Size = new System.Drawing.Size(451, 24);
             this.menuStrip.TabIndex = 2;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -341,7 +369,7 @@
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -350,21 +378,21 @@
             this.saveToolStripMenuItem.Enabled = false;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Enabled = false;
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAsToolStripMenuItem.Text = "Save as...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -382,23 +410,68 @@
             this.saveFileDialog.RestoreDirectory = true;
             this.saveFileDialog.Title = "Save configuration";
             // 
+            // notifyIcon
+            // 
+            this.notifyIcon.ContextMenuStrip = this.notifyContextMenuStrip;
+            this.notifyIcon.Text = "HashPasswordSharp";
+            this.notifyIcon.Visible = true;
+            this.notifyIcon.DoubleClick += new System.EventHandler(this.notifyIcon_DoubleClick);
+            // 
+            // notifyContextMenuStrip
+            // 
+            this.notifyContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.restoreToolStripMenuItem,
+            this.exitToolStripMenuItem1});
+            this.notifyContextMenuStrip.Name = "notifyContextMenuStrip";
+            this.notifyContextMenuStrip.Size = new System.Drawing.Size(114, 48);
+            // 
+            // restoreToolStripMenuItem
+            // 
+            this.restoreToolStripMenuItem.Name = "restoreToolStripMenuItem";
+            this.restoreToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.restoreToolStripMenuItem.Text = "&Restore";
+            this.restoreToolStripMenuItem.Click += new System.EventHandler(this.restoreToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem1
+            // 
+            this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
+            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(113, 22);
+            this.exitToolStripMenuItem1.Text = "&Exit";
+            this.exitToolStripMenuItem1.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // checkBoxClearPwOnExit
+            // 
+            this.checkBoxClearPwOnExit.AutoSize = true;
+            this.checkBoxClearPwOnExit.Checked = true;
+            this.checkBoxClearPwOnExit.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxClearPwOnExit.Location = new System.Drawing.Point(10, 57);
+            this.checkBoxClearPwOnExit.Name = "checkBoxClearPwOnExit";
+            this.checkBoxClearPwOnExit.Size = new System.Drawing.Size(130, 17);
+            this.checkBoxClearPwOnExit.TabIndex = 4;
+            this.checkBoxClearPwOnExit.Text = "Clear clipboard on exit";
+            this.checkBoxClearPwOnExit.UseVisualStyleBackColor = true;
+            this.checkBoxClearPwOnExit.CheckedChanged += new System.EventHandler(this.checkBoxClearPwOnExit_CheckedChanged);
+            // 
             // HashPasswordSharp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(438, 261);
+            this.ClientSize = new System.Drawing.Size(451, 260);
             this.Controls.Add(this.btnExit);
-            this.Controls.Add(this.btnAbout);
             this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.menuStrip);
             this.HelpButton = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
+            this.MaximizeBox = false;
             this.Name = "HashPasswordSharp";
             this.Text = "HashPasswordSharp";
             this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.HashPasswordSharp_HelpButtonClicked);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HashPasswordSharp_FormClosing);
             this.Shown += new System.EventHandler(this.HashPasswordSharp_Shown);
             this.HelpRequested += new System.Windows.Forms.HelpEventHandler(this.HashPasswordSharp_HelpRequested);
+            this.Resize += new System.EventHandler(this.HashPasswordSharp_Resize);
             this.tabControl.ResumeLayout(false);
             this.tabPageHome.ResumeLayout(false);
             this.tabPageHome.PerformLayout();
@@ -406,6 +479,7 @@
             this.tabPageSettings.PerformLayout();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
+            this.notifyContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -431,7 +505,6 @@
         private System.Windows.Forms.TabPage tabPageSynchronization;
         private System.Windows.Forms.Button btnGeneratePassword;
         private System.Windows.Forms.Button btnHelp;
-        private System.Windows.Forms.Button btnAbout;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
@@ -443,6 +516,13 @@
         private System.Windows.Forms.Label lblConfigPath;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
+        private System.Windows.Forms.ContextMenuStrip notifyContextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem restoreToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem1;
+        private System.Windows.Forms.CheckBox checkBoxStartMinimized;
+        private System.Windows.Forms.CheckBox checkBoxStartup;
+        private System.Windows.Forms.CheckBox checkBoxClearPwOnExit;
     }
 }
 

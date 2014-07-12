@@ -2,8 +2,10 @@
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Permissions;
 using System.Windows.Forms;
+using de.janbusch.HashPasswordSharp.Helper;
 using de.janbusch.HashPasswordSharp.HelpGuide;
 using de.janbusch.HashPasswordSharp.lib;
 using de.janbusch.HashPasswordSharp.lib.Config;
@@ -42,6 +44,24 @@ namespace de.janbusch.HashPasswordSharp
         #endregion
 
         #region Control methods
+        private void LoadSettings()
+        {
+            checkBoxClearPwOnExit.Checked = Settings.Default.ClearOnExit;
+            checkBoxStartMinimized.Checked = Settings.Default.StartMinimized;
+            try
+            {
+                checkBoxStartup.Checked = RegistryHelper.GetStartup();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            if (Settings.Default.StartMinimized)
+            {
+                this.WindowState = FormWindowState.Minimized;
+            }
+        }
+
         private void GeneratePassword()
         {
             HashUtil.SupportedHashAlgorithm algorithm;
@@ -154,6 +174,71 @@ namespace de.janbusch.HashPasswordSharp
         #endregion
 
         #region Events
+        private void HashPasswordSharp_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (Settings.Default.ClearOnExit)
+            {
+                Clipboard.SetText("42");
+            }
+        }
+
+        private void checkBoxClearPwOnExit_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.ClearOnExit = checkBoxClearPwOnExit.Checked;
+            Settings.Default.Save();
+        }
+
+        private void notifyIcon_DoubleClick(object sender, EventArgs e)
+        {
+            WindowState = WindowState == FormWindowState.Normal ? FormWindowState.Minimized : FormWindowState.Normal;
+        }
+
+        private void restoreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Normal;
+        }
+
+        private void HashPasswordSharp_Resize(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                this.ShowInTaskbar = false;
+                notifyIcon.ShowBalloonTip(1000, "JHashPassword", "I'm down here if you need me...", ToolTipIcon.Info);
+            }
+            else
+                this.ShowInTaskbar = true;
+        }
+
+        private void checkBoxStartMinimized_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.StartMinimized = checkBoxStartMinimized.Checked;
+            Settings.Default.Save();
+        }
+
+        private void checkBoxStartup_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                RegistryHelper.SetStartup(checkBoxStartup.Checked);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void txtPassphraseReenter_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                btnGeneratePassword.PerformClick();
+        }
+
+        private void txtPassphrase_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                btnGeneratePassword.PerformClick();
+        }
+
         private void btnGeneratePassword_Click(object sender, EventArgs e)
         {
             GeneratePassword();
@@ -213,7 +298,11 @@ namespace de.janbusch.HashPasswordSharp
                 }
             }
 
+            notifyIcon.Visible = true;
+            notifyIcon.Icon = new Icon(Path.Combine("Resources", Settings.Default.AppIcon));
             txtPassphrase.Focus();
+
+            LoadSettings();
         }
 
         private void comboBoxHost_SelectedIndexChanged(object sender, EventArgs e)
@@ -274,6 +363,7 @@ namespace de.janbusch.HashPasswordSharp
         {
             ShowGuide();
         }
+
         private void HashPasswordSharp_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
             ShowGuide();

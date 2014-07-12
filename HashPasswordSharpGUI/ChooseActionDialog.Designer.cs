@@ -89,10 +89,11 @@
             this.pbQrCode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbQrCode.BackColor = System.Drawing.Color.White;
             this.pbQrCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbQrCode.Location = new System.Drawing.Point(12, 98);
             this.pbQrCode.Name = "pbQrCode";
-            this.pbQrCode.Size = new System.Drawing.Size(313, 180);
+            this.pbQrCode.Size = new System.Drawing.Size(313, 313);
             this.pbQrCode.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbQrCode.TabIndex = 4;
             this.pbQrCode.TabStop = false;
@@ -101,7 +102,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(337, 290);
+            this.ClientSize = new System.Drawing.Size(337, 423);
             this.Controls.Add(this.pbQrCode);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.label1);
