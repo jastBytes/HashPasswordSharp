@@ -16,7 +16,7 @@ namespace de.janbusch.HashPasswordSharp.lib
         public enum SupportedHashAlgorithm { MD5, SHA1, SHA256, SHA384, SHA512 }
 
         /// <summary>
-        /// Method for generating password from the input values.
+        /// Method for generating password from input values.
         /// </summary>
         /// <param name="host"></param>
         /// <param name="login"></param>
@@ -100,7 +100,6 @@ namespace de.janbusch.HashPasswordSharp.lib
             // byte array representation of that string
             byte[] encodedPassword = new UTF8Encoding().GetBytes(basestring);
 
-            // need MD5 to calculate the hash
             byte[] hash = hashAlgorithm.ComputeHash(encodedPassword);
 
             return hash;
