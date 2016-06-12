@@ -1,7 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
-using JaSt.HashPasswordSharp.Properties;
-using QRCoder;
+using de.janbusch.HashPasswordSharp.Properties;
+using Gma.QrCodeNet.Encoding.Windows.Render;
+using Gma.QrCodeNet.Encoding;
 
 namespace JaSt.HashPasswordSharp
 {
@@ -29,9 +36,21 @@ namespace JaSt.HashPasswordSharp
 
         private void btnShowQRCode_Click(object sender, EventArgs e)
         {
-            var qrGenerator = new QRCodeGenerator();
-            var qrCode = qrGenerator.CreateQrCode(_password, QRCodeGenerator.ECCLevel.Q);
-            pbQrCode.Image = qrCode.GetGraphic(20);
+            var qrGenerator = new QrEncoder();
+            var qrCode = qrGenerator.Encode(_password);
+
+            var gRenderer = new GraphicsRenderer(
+                new FixedModuleSize(6, QuietZoneModules.Two));
+
+            using (var ms = new MemoryStream())
+            {
+                gRenderer.WriteToStream(qrCode.Matrix, ImageFormat.Png, ms);
+                using (pbQrCode.Image)
+                {
+                    pbQrCode.Image = new Bitmap(ms);
+                }
+            }
+
         }
 
         private void ChooseActionDialog_FormClosing(object sender, FormClosingEventArgs e)
