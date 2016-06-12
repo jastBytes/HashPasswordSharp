@@ -1,4 +1,4 @@
-﻿namespace de.janbusch.HashPasswordSharp
+﻿namespace JaSt.HashPasswordSharp
 {
     partial class HashPasswordSharp
     {

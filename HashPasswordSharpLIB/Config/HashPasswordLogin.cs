@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace de.janbusch.HashPasswordSharp.lib.Config
+namespace JaSt.HashPasswordSharp.Library.Config
 {
     [XmlRoot(ElementName = "LoginName")]
     public class HashPasswordLogin

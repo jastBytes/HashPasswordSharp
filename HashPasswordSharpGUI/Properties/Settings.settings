@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="de.janbusch.HashPasswordSharp.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="JaSt.HashPasswordSharp.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="LastConfigFilepath" Type="System.String" Scope="User">

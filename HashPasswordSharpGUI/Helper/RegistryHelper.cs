@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using Microsoft.Win32;
 
-namespace de.janbusch.HashPasswordSharp.Helper
+namespace JaSt.HashPasswordSharp.Helper
 {
     public static class RegistryHelper
     {

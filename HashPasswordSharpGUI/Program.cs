@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace de.janbusch.HashPasswordSharp
+namespace JaSt.HashPasswordSharp
 {
     static class Program
     {

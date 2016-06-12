@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace de.janbusch.HashPasswordSharp.lib.Config
+namespace JaSt.HashPasswordSharp.Library.Config
 {
     [XmlRoot(ElementName = "HashPassword")]
     public class HashPasswordConfiguration
@@ -25,7 +25,7 @@ namespace de.janbusch.HashPasswordSharp.lib.Config
                 var oldVal = value;
                 _hosts = value;
                 if (oldVal.Equals(_hosts)) return;
-                if (ConfigChanged != null) ConfigChanged(this, EventArgs.Empty);
+                ConfigChanged?.Invoke(this, EventArgs.Empty);
             }
         }
         private HashPasswordHosts _hosts;
@@ -39,7 +39,7 @@ namespace de.janbusch.HashPasswordSharp.lib.Config
                 var oldVal = value;
                 _version = value;
                 if (oldVal.Equals(_version)) return;
-                if (ConfigChanged != null) ConfigChanged(this, EventArgs.Empty);
+                ConfigChanged?.Invoke(this, EventArgs.Empty);
             }
         }
         private string _version;
@@ -53,7 +53,7 @@ namespace de.janbusch.HashPasswordSharp.lib.Config
                 var oldVal = value;
                 _defaultHashType = value;
                 if (oldVal.Equals(_defaultHashType)) return;
-                if (ConfigChanged != null) ConfigChanged(this, EventArgs.Empty);
+                ConfigChanged?.Invoke(this, EventArgs.Empty);
             }
         }
         private string _defaultHashType;
@@ -67,7 +67,7 @@ namespace de.janbusch.HashPasswordSharp.lib.Config
                 var oldVal = value;
                 _defaultCharset = value;
                 if (oldVal.Equals(_defaultCharset)) return;
-                if (ConfigChanged != null) ConfigChanged(this, EventArgs.Empty);
+                ConfigChanged?.Invoke(this, EventArgs.Empty);
             }
         }
         private string _defaultCharset;
@@ -81,8 +81,7 @@ namespace de.janbusch.HashPasswordSharp.lib.Config
                 var oldVal = value;
                 _defaultPasswordLength = value;
                 if (oldVal.Equals(_defaultPasswordLength)) return;
-                if (ConfigChanged != null) ConfigChanged(this, EventArgs.Empty);
-
+                ConfigChanged?.Invoke(this, EventArgs.Empty);
             }
         }
         private string _defaultPasswordLength;
@@ -96,7 +95,7 @@ namespace de.janbusch.HashPasswordSharp.lib.Config
                 var oldVal = value;
                 _lastHost = value;
                 if (oldVal.Equals(_lastHost)) return;
-                if (ConfigChanged != null) ConfigChanged(this, EventArgs.Empty);
+                ConfigChanged?.Invoke(this, EventArgs.Empty);
             }
         }
         private string _lastHost;
@@ -110,7 +109,7 @@ namespace de.janbusch.HashPasswordSharp.lib.Config
                 var oldVal = value;
                 _timeout = value;
                 if (oldVal.Equals(_timeout)) return;
-                if (ConfigChanged != null) ConfigChanged(this, EventArgs.Empty);
+                ConfigChanged?.Invoke(this, EventArgs.Empty);
             }
         }
         private string _timeout;
@@ -122,28 +121,28 @@ namespace de.janbusch.HashPasswordSharp.lib.Config
                 path = Filepath;
             }
 
-            var writer = new System.Xml.Serialization.XmlSerializer(typeof(HashPasswordConfiguration));
+            var writer = new XmlSerializer(typeof(HashPasswordConfiguration));
             using (var file = new System.IO.StreamWriter(path))
             {
                 writer.Serialize(file, this);
             }
-            this.Filepath = path;
+            Filepath = path;
         }
 
         public static HashPasswordConfiguration LoadFromXml(string path)
         {
-            var reader = new System.Xml.Serialization.XmlSerializer(typeof(HashPasswordConfiguration));
+            var reader = new XmlSerializer(typeof(HashPasswordConfiguration));
             using (var file = new System.IO.StreamReader(path))
             {
                 var result = (HashPasswordConfiguration)reader.Deserialize(file);
                 result.Filepath = path;
-                result.ConfigChanged += result_ConfigChanged;
+                result.ConfigChanged += Result_ConfigChanged;
                 result.HasChanged = false;
                 return result;
             }
         }
 
-        static void result_ConfigChanged(object sender, EventArgs e)
+        private static void Result_ConfigChanged(object sender, EventArgs e)
         {
             var hashPasswordConfiguration = sender as HashPasswordConfiguration;
             if (hashPasswordConfiguration != null) hashPasswordConfiguration.HasChanged = true;
@@ -156,9 +155,6 @@ namespace de.janbusch.HashPasswordSharp.lib.Config
         public List<HashPasswordHost> Host { get; set; }
 
         [XmlAttribute]
-        public string Count
-        {
-            get { return Host.Count.ToString(); }
-        }
+        public string Count => Host.Count.ToString();
     }
 }

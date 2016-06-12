@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace de.janbusch.HashPasswordSharp.HelpGuide
+namespace JaSt.HashPasswordSharp.HelpGuide
 {
     public partial class GuidePage : UserControl
     {

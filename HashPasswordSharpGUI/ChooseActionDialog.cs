@@ -1,24 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using de.janbusch.HashPasswordSharp.Properties;
+using JaSt.HashPasswordSharp.Properties;
 using QRCoder;
 
-namespace de.janbusch.HashPasswordSharp
+namespace JaSt.HashPasswordSharp
 {
     public partial class ChooseActionDialog : Form
     {
-        private string _password;
+        private readonly string _password;
 
         public ChooseActionDialog(string password)
         {
             InitializeComponent();
-            this._password = password;
+            _password = password;
             txtPassword.Text = password;
         }
 

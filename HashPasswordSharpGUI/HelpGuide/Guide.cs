@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
-namespace de.janbusch.HashPasswordSharp.HelpGuide
+namespace JaSt.HashPasswordSharp.HelpGuide
 {
     public partial class Guide : Form
     {

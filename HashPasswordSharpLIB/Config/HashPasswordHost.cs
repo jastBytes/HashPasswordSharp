@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace de.janbusch.HashPasswordSharp.lib.Config
+namespace JaSt.HashPasswordSharp.Library.Config
 {
     [XmlRoot(ElementName = "Host")]
     public class HashPasswordHost

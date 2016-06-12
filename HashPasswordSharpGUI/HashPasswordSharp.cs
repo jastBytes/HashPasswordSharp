@@ -2,16 +2,14 @@
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Security.Permissions;
 using System.Windows.Forms;
-using de.janbusch.HashPasswordSharp.Helper;
-using de.janbusch.HashPasswordSharp.HelpGuide;
-using de.janbusch.HashPasswordSharp.lib;
-using de.janbusch.HashPasswordSharp.lib.Config;
-using de.janbusch.HashPasswordSharp.Properties;
+using JaSt.HashPasswordSharp.Helper;
+using JaSt.HashPasswordSharp.HelpGuide;
+using JaSt.HashPasswordSharp.Library;
+using JaSt.HashPasswordSharp.Library.Config;
+using JaSt.HashPasswordSharp.Properties;
 
-namespace de.janbusch.HashPasswordSharp
+namespace JaSt.HashPasswordSharp
 {
     public partial class HashPasswordSharp : Form
     {
@@ -129,16 +127,11 @@ namespace de.janbusch.HashPasswordSharp
         private void LoadConfiguration()
         {
             comboBoxHost.Items.Clear();
-            comboBoxHost.Items.AddRange(CurrentConfiguration.Hosts.Host.ToArray());
-
-            if (!string.IsNullOrEmpty(CurrentConfiguration.LastHost))
+            if (CurrentConfiguration == null) return;
+            if (CurrentConfiguration.Hosts?.Host != null)
             {
-                comboBoxHost.SelectedItem =
-                    CurrentConfiguration.Hosts.Host.FirstOrDefault(h => h.Name.Equals(CurrentConfiguration.LastHost));
-            }
-            else
-            {
-                comboBoxHost.SelectedItem = CurrentConfiguration.Hosts.Host.FirstOrDefault();
+                comboBoxHost.Items.AddRange(CurrentConfiguration.Hosts.Host.ToArray());
+                comboBoxHost.SelectedItem = !string.IsNullOrEmpty(CurrentConfiguration.LastHost) ? CurrentConfiguration.Hosts.Host.FirstOrDefault(h => h.Name.Equals(CurrentConfiguration.LastHost)) : CurrentConfiguration.Hosts.Host.FirstOrDefault();
             }
 
             DisableSaveChanges();

@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace de.janbusch.HashPasswordSharp.lib
+namespace JaSt.HashPasswordSharp.Library
 {
     /// <summary>
     /// This utility class contains static methods for generating passwords from passphrases using different hashing algorithms.
@@ -25,43 +25,33 @@ namespace de.janbusch.HashPasswordSharp.lib
         /// <param name="characterSet"></param>
         /// <param name="maxPwLength"></param>
         /// <returns>Generated password</returns>
-        public static string GeneratePassword(string host, string login,
-            string passphrase, SupportedHashAlgorithm algorithm, string characterSet,
-            int maxPwLength)
+        public static string GeneratePassword(string host, string login, string passphrase, SupportedHashAlgorithm algorithm, string characterSet, int maxPwLength)
         {
             var hashAlgorithm = CryptoConfig.CreateFromName(algorithm.ToString()) as HashAlgorithm;
 
-            string basestring;
-            if (login.Length == 0)
+            var basestring = string.IsNullOrWhiteSpace(login) ? $"{passphrase}@{host}" : $"{login}@{host}#{passphrase}";
+            var digest = CreateHash(hashAlgorithm, basestring);
+
+            var digestLength = digest.Length;
+            var sPassword = string.Empty;
+
+            var pos = 0;
+            var bitno = 0;
+            var charSetLength = characterSet.Length;
+
+            var maxBitCnt = (int)Math.Ceiling(Math.Log(charSetLength) / Math.Log(2));
+
+            for (var i = 0; (i < maxPwLength) && (pos * 8 + bitno < digestLength * 8); ++i)
             {
-                basestring = passphrase + "@" + host;
-            }
-            else
-            {
-                basestring = login + "@" + host + "#" + passphrase;
-            }
-            byte[] digest = CreateHash(hashAlgorithm, basestring);
+                var part = 0;
+                var bitCnt = maxBitCnt;
+                var actPos = pos;
+                var actBitno = bitno;
 
-            int digestLength = digest.Length;
-            string sPassword = "";
-
-            int pos = 0;
-            int bitno = 0;
-            int charSetLength = characterSet.Length;
-
-            int maxBitCnt = (int)Math.Ceiling(Math.Log(charSetLength) / Math.Log(2));
-
-            for (int i = 0; (i < maxPwLength) && ((pos * 8 + bitno) < (digestLength * 8)); ++i)
-            {
-                int part = 0;
-                int bitCnt = maxBitCnt;
-                int actPos = pos;
-                int actBitno = bitno;
-
-                for (int j = 0; (j < bitCnt) && ((actPos * 8 + actBitno) < (digestLength * 8)); ++j)
+                for (var j = 0; (j < bitCnt) && (actPos * 8 + actBitno < digestLength * 8); ++j)
                 {
                     part <<= 1;
-                    part |= ((digest[actPos] & (1 << actBitno)) != 0) ? 1 : 0;
+                    part |= (digest[actPos] & (1 << actBitno)) != 0 ? 1 : 0;
                     if (++actBitno >= 8)
                     {
                         ++actPos;
@@ -98,10 +88,10 @@ namespace de.janbusch.HashPasswordSharp.lib
         private static byte[] CreateHash(HashAlgorithm hashAlgorithm, string basestring)
         {
             // byte array representation of that string
-            byte[] encodedPassword = new UTF8Encoding().GetBytes(basestring);
+            var encodedPassword = new UTF8Encoding().GetBytes(basestring);
 
             // need MD5 to calculate the hash
-            byte[] hash = hashAlgorithm.ComputeHash(encodedPassword);
+            var hash = hashAlgorithm.ComputeHash(encodedPassword);
 
             return hash;
         }

@@ -1,4 +1,4 @@
-﻿namespace de.janbusch.HashPasswordSharp.HelpGuide
+﻿namespace JaSt.HashPasswordSharp.HelpGuide
 {
     partial class Guide
     {
